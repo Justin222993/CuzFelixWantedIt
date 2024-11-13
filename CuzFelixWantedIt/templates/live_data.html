@@ -11,21 +11,19 @@
 
     <script>
         function updateLiveData() {
-            fetch('/sensor-data')
+            fetch('/latest-sensor-data')  <!-- Changed to new endpoint -->
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('temperature').textContent = '';
-                    document.getElementById('humidity').textContent = '';
-                    document.getElementById('temperature').textContent = data.temperature || '--';
-                    document.getElementById('humidity').textContent = data.humidity || '--';
+                    document.getElementById('temperature').textContent = data.temperature !== null ? data.temperature : '--';
+                    document.getElementById('humidity').textContent = data.humidity !== null ? data.humidity : '--';
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
         }
 
-        setInterval(updateLiveData, 5000);
+        setInterval(updateLiveData, 5000);  // Update every 5 seconds
 
-        updateLiveData();
+        updateLiveData();  // Initial fetch when page loads
     </script>
 {% endblock %}

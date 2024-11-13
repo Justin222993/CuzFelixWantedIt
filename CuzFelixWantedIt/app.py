@@ -44,5 +44,15 @@ def contact():
 def get_sensor_data():
     return jsonify(sensor_data)
 
+@app.route('/latest-sensor-data')
+def get_latest_sensor_data():
+    if len(sensor_data["temperature"]) > 0 and len(sensor_data["humidity"]) > 0:
+        latest_temperature = sensor_data["temperature"][-1]
+        latest_humidity = sensor_data["humidity"][-1]
+        return jsonify({
+            "temperature": latest_temperature,
+            "humidity": latest_humidity
+        })
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
