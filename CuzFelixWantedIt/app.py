@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 app = Flask(__name__)
 
 # MQTT setup
-QTT_BROKER = "localhost"
+MQTT_BROKER = "localhost"
 MQTT_TOPIC_TEMPHUM = "sensor/temphum"
 sensor_data = {"temperature": [], "humidity": []}
 def on_connect(client, userdata, flags, rc):
